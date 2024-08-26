@@ -1,0 +1,40 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0px;
+  background-color: #000000; 
+  color: #ffffff;
+  text-align: center;
+  font-style: italic;
+  z-index: 1001;
+  margin: 0; 
+  border-top: 1px solid #242424; 
+}
+
+  
+  @media (max-width: 855px) {
+    .icon {
+      height: 20px;
+      width: 20px;
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+  
+    }
+  
+    .icon:hover {
+      transform: scale(1.2);
+    }
+  }
+  
+  @media (min-width: 856px) {
+    .icon {
+      display: none;
+
+    }
+
+   
+  }
+  
+  

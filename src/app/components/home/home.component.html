@@ -1,0 +1,39 @@
+<div class="container">
+  
+  <div class="slider-container">
+    <button class="slider-button left" (click)="prevSlide()">&#10094;</button>
+    <div class="slider">
+      <div class="slider-wrapper" [style.transform]="transform">
+        <div *ngFor="let movie of popularMovies" class="slider-slide" (click)="goToDetail(movie.id)">
+          <div class="movie-card">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="slider-button right" (click)="nextSlide()">&#10095;</button>
+  </div>
+
+<div class="categories">
+  <button class="category-button" [ngClass]="{'active': currentCategoryTitle === 'Now Playing'}" (click)="loadCategory('nowPlaying')">Now Playing</button>
+  <button class="category-button" [ngClass]="{'active': currentCategoryTitle === 'Upcoming'}" (click)="loadCategory('upcoming')">Upcoming</button>
+  <button class="category-button" [ngClass]="{'active': currentCategoryTitle === 'Top Rated'}" (click)="loadCategory('topRated')">Top Rated</button>
+</div>
+
+
+  <div *ngIf="currentCategoryMovies.length > 0">
+    <div class="category-slider">
+      <div class="category-slider-wrapper">
+        <div *ngFor="let movie of currentCategoryMovies" class="category-slide" (click)="goToDetail(movie.id)">
+          <div class="movie-card">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scroll1" (click)="scrollTop()">
+  <img src="https://izmirvitray.com.tr/images/top.png" alt="En Üste Git" class="scroll1-button"/>
+</div>

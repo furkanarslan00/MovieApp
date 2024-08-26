@@ -1,0 +1,31 @@
+<div class="movie-detail-container" *ngIf="movie">
+  <div class="movie-header">
+    <img src="https://static.vecteezy.com/system/resources/thumbnails/020/998/055/small_2x/rounded-back-icon-element-free-png.png" alt="Back" (click)="goBack()" class="back-button" />
+    <h1 class="detail-title">Detail</h1>
+    <img 
+      [src]="isInWatchlist ? 'https://cdn-icons-png.flaticon.com/512/6048/6048565.png' : 'https://cdn-icons-png.freepik.com/256/13251/13251984.png'"
+      alt="Add to Watchlist" 
+      (click)="addToWatchlist(movie)" 
+      class="watchlist-button" 
+    />
+  </div>
+  <img class="movie-poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
+       (error)="onImageError($event)"
+       alt="{{ movie.title }}">
+  <div class="movie-info">
+    <h1 class="movie-title">{{ movie.title }}</h1>
+    <p class="movie-overview">{{ movie.overview }}</p>
+    <div class="movie-detail">
+      <span>Release Date:</span> {{ movie.release_date ? (movie.release_date | date) : 'Unknown' }}
+    </div>
+    <div class="movie-detail">
+      <span>Rating:</span> {{ getRating(movie.vote_average) }}
+    </div>
+    <div class="movie-detail">
+      <span>Runtime:</span> {{ getDuration(movie.runtime) }}
+    </div>
+  </div>
+</div>
+<div *ngIf="!movie">
+  <p>Loading...</p>
+</div>

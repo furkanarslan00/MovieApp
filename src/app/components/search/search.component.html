@@ -1,0 +1,42 @@
+<div class="search-container">
+  <input type="text" [(ngModel)]="tempQuery" placeholder="Search for a movie...">
+  <img src="https://www.svgrepo.com/show/7109/search.svg" class="search-icon" (click)="searchMovies()">
+</div>
+
+<div class="search-results" *ngIf="searchResults.length > 0">
+  <div *ngFor="let movie of searchResults" class="movie-card">
+    <a [routerLink]="['/movie', movie.id]">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+           (error)="onImageError($event)"
+           alt="{{ movie.title }}">
+      <h2>{{ movie.title }}</h2>
+      <div class="special">
+        <div class="detail">
+          <img src="https://media.lordicon.com/icons/wired/lineal/237-star-rating.svg" alt="Rating Icon">
+          <p class="rating">{{ getRating(movie.vote_average) }}</p>
+        </div>
+        <div class="detail">
+          <img src="https://cdn-icons-png.flaticon.com/512/8694/8694015.png" alt="Genre Icon">
+          <p>{{ getGenres(movie.genre_ids) || 'Unknown' }}</p>
+        </div>
+        <div class="detail">
+          <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678116-calendar-512.png" alt="Date Icon">
+          <p>{{ movie.release_date ? (movie.release_date | date) : 'Unknown' }}</p>
+        </div>
+        <div class="detail">
+          <img src="https://cdn-icons-png.flaticon.com/512/4305/4305432.png" alt="Duration Icon">
+          <p>{{ getDuration(movie.runtime) }}</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div *ngIf="searchExecuted && searchResults.length === 0" class="no-results">
+  <img [src]="gifPath" alt="ErrorGif" class="no-results-gif">
+  <p>No result for "{{ searchQuery }}"</p>
+</div>
+
+<div class="scroll1" *ngIf="scrollButtonVisible" (click)="scrollTop()">
+  <img src="https://izmirvitray.com.tr/images/top.png" alt="En Üste Git" class="scroll1-button"/>
+</div>

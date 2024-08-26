@@ -1,0 +1,19 @@
+<nav class="navbar" [ngClass]="{'navbar-expanded': isNavbarExpanded}">
+  <ul class="navbar-list">
+    <li>
+      <a routerLink="/" class="navbar-item" [ngClass]="{'active': isActive('/')}">
+        <img src="https://cdn-icons-png.freepik.com/512/5542/5542965.png" alt="Error" class="navbar-icon"> HOME
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/search']" class="navbar-item" [ngClass]="{'active': isActive('/search')}">
+        <img src="https://cdn-icons-png.flaticon.com/512/3875/3875680.png" alt="Error" class="navbar-icon"> SEARCH
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/watchlist']" class="navbar-item" [ngClass]="{'active': isActive('/watchlist')}">
+        <img src="https://cdn0.iconfinder.com/data/icons/simple-lines-filled-part-3/32/96_Bookmark_Mark_Tag_Text_Favorite_Book_Remember-512.png" alt="Error" class="navbar-icon"> WATCHLIST
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,137 @@
+.watchlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 200px;
+  text-align: center;
+  border: 1px solid #391886;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 22px 22px 25px rgba(109, 80, 238, 0.1);
+  transition: transform 0.2s;
+  margin-top: 70px;
+  position: relative;
+}
+
+h2{
+  color: #ffffff;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.movie-card h2 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.movie-card p {
+  font-size: 13px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.special {
+  margin-top: 20px;
+  color: #a3660b;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.detail img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.rating {
+  color: #d69136 !important; 
+}
+
+.remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #363636;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.remove-button:hover {
+  background: #5e5e5d;
+  transform: scale(1.2);       
+}
+
+.empty-watchlist {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.empty-watchlist img.no-movies-image {
+  width: 250px;
+  height: 250px;
+}
+
+.empty-watchlist p {
+  font-size: 22px;
+  color: #9c81da;
+  margin-top: 20px;
+}
+
+.animated-text {
+  font-size: 24px;
+  margin-top: 20px;
+  animation: moveLeftRight 2s infinite;
+}
+
+@keyframes moveLeftRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 910px) {
+  .empty-watchlist {
+    margin-top: 30px;
+  }
+
+  .empty-watchlist img.no-movies-image {
+    width: 170px;
+    height: 170px;
+  }
+
+  .watchlist-container {
+ margin-bottom: 100px;
+  }
+}

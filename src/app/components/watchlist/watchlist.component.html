@@ -1,0 +1,32 @@
+<div *ngIf="watchlist.length > 0" class="watchlist-container">
+  <div *ngFor="let movie of watchlist" class="movie-card">
+    <div class="movie-card-header">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + (movie.poster_path || 'default-poster.jpg')"
+           (error)="onImageError($event)"
+           alt="{{ movie.title || 'No Title' }}">
+      <button class="remove-button" (click)="removeFromWatchlist(movie)">×</button>
+    </div>
+    <h2>{{ movie.title || 'Unknown Title' }}</h2>
+    <div class="special">
+      <div class="detail">
+        <img src="https://media.lordicon.com/icons/wired/lineal/237-star-rating.svg" alt="Rating Icon">
+        <p class="rating">{{ getRating(movie.vote_average) }}</p>
+      </div>
+
+      <div class="detail">
+        <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678116-calendar-512.png" alt="Date Icon">
+        <p>{{ movie.release_date ? (movie.release_date | date) : 'Unknown' }}</p>
+      </div>
+      <div class="detail">
+        <img src="https://cdn-icons-png.flaticon.com/512/4305/4305432.png" alt="Duration Icon">
+        <p>{{ getDuration(movie.runtime) }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="watchlist.length === 0" class="empty-watchlist">
+  <img src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png" alt="No Movies" class="no-movies-image">
+  <p class="animated-text">There is no movie yet!</p>
+</div>
