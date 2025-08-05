@@ -19,4 +19,3 @@ This project is a movie application developed using Angular. The application fet
 - HTML: Used to build the user interface.
 - CSS: Applied for styling and layout of the application.
 - The Movie Database (TMDb) API: Used to fetch movie data.
-
