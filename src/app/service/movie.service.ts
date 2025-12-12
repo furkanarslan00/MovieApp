@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -7,54 +7,57 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MovieService {
-  private apiKey: string = '4d09a3159ff68ff013710588657bfee6';  
+
   private apiUrl: string = 'https://api.themoviedb.org/3';
 
-  constructor(private http: HttpClient) { }
+  private accessToken: string = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDA5YTMxNTlmZjY4ZmYwMTM3MTA1ODg2NTdiZmVlNiIsIm5iZiI6MTcyNDAwNDU4MS4wNjQ5OTk4LCJzdWIiOiI2NmMyMzhlNWY0ODczYTU4YzFkNTQ2NzUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.tvjjXTKHHKJ_u3IeZwiIi0OiOS6xS0bOnm1rvHtApjE';
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      accept: 'application/json',
+      Authorization: `Bearer ${this.accessToken}`
+    })
+  };
+
+  constructor(private http: HttpClient) {}
 
   getPopularMovies(): Observable<any> {
-    const url = `${this.apiUrl}/trending/movie/week?api_key=${this.apiKey}`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.results)
-    );
+    return this.http
+      .get(`${this.apiUrl}/trending/movie/week`, this.httpOptions)
+      .pipe(map((res: any) => res.results));
   }
 
   getNowPlayingMovies(): Observable<any> {
-    const url = `${this.apiUrl}/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=1`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.results)
-    );
+    return this.http
+      .get(`${this.apiUrl}/movie/now_playing?language=en-US&page=1`, this.httpOptions)
+      .pipe(map((res: any) => res.results));
   }
 
   getUpcomingMovies(): Observable<any> {
-    const url = `${this.apiUrl}/movie/upcoming?api_key=${this.apiKey}&language=en-US&page=1`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.results)
-    );
+    return this.http
+      .get(`${this.apiUrl}/movie/upcoming?language=en-US&page=1`, this.httpOptions)
+      .pipe(map((res: any) => res.results));
   }
 
   getTopRatedMovies(): Observable<any> {
-    const url = `${this.apiUrl}/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=1`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.results)
-    );
+    return this.http
+      .get(`${this.apiUrl}/movie/top_rated?language=en-US&page=1`, this.httpOptions)
+      .pipe(map((res: any) => res.results));
   }
 
   searchMovies(query: string): Observable<any> {
-    const url = `${this.apiUrl}/search/movie?api_key=${this.apiKey}&query=${query}&language=en-US&page=1&include_adult=false`;
-    return this.http.get(url).pipe(
-      map((response: any) => response.results)
-    );
+    return this.http
+      .get(`${this.apiUrl}/search/movie?query=${query}&language=en-US&page=1&include_adult=false`, this.httpOptions)
+      .pipe(map((res: any) => res.results));
   }
 
   getMovieDetails(id: number): Observable<any> {
-    const url = `${this.apiUrl}/movie/${id}?api_key=${this.apiKey}&language=en-US`;
-    return this.http.get(url);
+    return this.http
+      .get(`${this.apiUrl}/movie/${id}?language=en-US`, this.httpOptions);
   }
-  
 
   getMovie(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`);
+    return this.http
+      .get(`${this.apiUrl}/movie/${id}`, this.httpOptions);
   }
-
 }
